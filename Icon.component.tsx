@@ -9,15 +9,25 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import * as Styled from "./Icon.styles";
+import { IconName } from "./";
 
 library.add(fal, fab, fad, fas, far);
 
-export type IconName = "question-circle" | "copyright" | "twitter";
-
-export interface IconProps {
+export type IconProps {
   name: IconName;
-  size?: string;
-  color?: string;
+  className?: string;
+}
+
+const Icon: React.FC<IconProps> = (props): JSX.Element => {
+  const { name, className } = props;
+
+  const iconName = mapNamePropToFaNames(name);
+
+  return (
+    <Styled.Icon className={className}>
+      <FontAwesomeIcon icon={iconName} />
+    </Styled.Icon>
+  );
 }
 
 function mapNamePropToFaNames(iconName: IconName): IconProp {
@@ -36,26 +46,5 @@ function mapNamePropToFaNames(iconName: IconName): IconProp {
   }
 }
 
-function Icon(props: IconProps): JSX.Element {
-  const { size, color, name } = props;
 
-  const iconName = mapNamePropToFaNames(name);
-
-  return (
-    <Styled.Container size={size}>
-      <FontAwesomeIcon color={color} size={"lg"} icon={iconName} />
-    </Styled.Container>
-  );
-}
-
-export function IconSet(props: {size: string}) {
-  return (
-    <Styled.IconSet>
-      <Icon name="twitter" size={props.size} /> 
-      <Icon name="copyright" size={props.size} /> 
-      <Icon name="question-circle" size={props.size} /> 
-    </Styled.IconSet>
-  )
-}
-
-export default Icon as React.FC;
+export default Icon;

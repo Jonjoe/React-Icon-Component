@@ -1,3 +1,5 @@
-import Icon from './Icon.component'
+import Icon from "./Icon.component";
 
-export default Icon
+export type IconName = "question-circle" | "copyright" | "twitter";
+
+export default Icon;
