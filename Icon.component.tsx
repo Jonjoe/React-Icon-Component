@@ -8,15 +8,14 @@ import { fas } from "@fortawesome/pro-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 
-import * as Styled from "./Icon.styles";
 import { IconName } from "./";
 
 library.add(fal, fab, fad, fas, far);
 
-export type IconProps {
+export type IconProps = {
   name: IconName;
   className?: string;
-}
+};
 
 const Icon: React.FC<IconProps> = (props): JSX.Element => {
   const { name, className } = props;
@@ -24,11 +23,11 @@ const Icon: React.FC<IconProps> = (props): JSX.Element => {
   const iconName = mapNamePropToFaNames(name);
 
   return (
-    <Styled.Icon className={className}>
+    <div className={className}>
       <FontAwesomeIcon icon={iconName} />
-    </Styled.Icon>
+    </div>
   );
-}
+};
 
 function mapNamePropToFaNames(iconName: IconName): IconProp {
   switch (iconName) {
@@ -45,6 +44,5 @@ function mapNamePropToFaNames(iconName: IconName): IconProp {
       return ["fal", "question-circle"];
   }
 }
-
 
 export default Icon;
